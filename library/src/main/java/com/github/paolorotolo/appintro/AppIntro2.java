@@ -1,6 +1,5 @@
 package com.github.paolorotolo.appintro;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -124,8 +123,8 @@ public abstract class AppIntro2 extends FragmentActivity {
         }
     }
 
-    public void addSlide(@NonNull Fragment fragment, @NonNull Context context) {
-        fragments.add(Fragment.instantiate(context, fragment.getClass().getName()));
+    public void addSlide(@NonNull Fragment fragment) {
+        fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
     }
 
