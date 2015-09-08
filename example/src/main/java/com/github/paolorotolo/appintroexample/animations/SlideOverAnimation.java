@@ -9,12 +9,12 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintroexample.MainActivity;
 import com.github.paolorotolo.appintroexample.R;
 import com.github.paolorotolo.appintroexample.SampleSlide;
-import com.github.paolorotolo.appintroexample.slides.FirstSlide;
-import com.github.paolorotolo.appintroexample.slides.FourthSlide;
-import com.github.paolorotolo.appintroexample.slides.SecondSlide;
-import com.github.paolorotolo.appintroexample.slides.ThirdSlide;
 
-public class FadeAnimation extends AppIntro {
+/**
+ * Created by rohit on 22/7/15.
+ */
+public class SlideOverAnimation extends AppIntro {
+
     @Override
     public void init(Bundle savedInstanceState) {
         addSlide(SampleSlide.newInstance(R.layout.intro));
@@ -22,7 +22,7 @@ public class FadeAnimation extends AppIntro {
         addSlide(SampleSlide.newInstance(R.layout.intro3));
         addSlide(SampleSlide.newInstance(R.layout.intro4));
 
-        setFadeAnimation();
+        setSlideOverAnimation();
     }
 
     private void loadMainActivity(){

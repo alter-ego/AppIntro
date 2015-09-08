@@ -1,20 +1,15 @@
-package com.github.paolorotolo.appintroexample.animations;
+package com.github.paolorotolo.appintroexample.indicators;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintroexample.MainActivity;
 import com.github.paolorotolo.appintroexample.R;
 import com.github.paolorotolo.appintroexample.SampleSlide;
-import com.github.paolorotolo.appintroexample.slides.FirstSlide;
-import com.github.paolorotolo.appintroexample.slides.FourthSlide;
-import com.github.paolorotolo.appintroexample.slides.SecondSlide;
-import com.github.paolorotolo.appintroexample.slides.ThirdSlide;
 
-public class FadeAnimation extends AppIntro {
+public class ProgressIndicator extends AppIntro {
     @Override
     public void init(Bundle savedInstanceState) {
         addSlide(SampleSlide.newInstance(R.layout.intro));
@@ -22,7 +17,7 @@ public class FadeAnimation extends AppIntro {
         addSlide(SampleSlide.newInstance(R.layout.intro3));
         addSlide(SampleSlide.newInstance(R.layout.intro4));
 
-        setFadeAnimation();
+        setProgressIndicator();
     }
 
     private void loadMainActivity(){

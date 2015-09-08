@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.paolorotolo:appintro:2.0.0'
+  compile 'com.github.paolorotolo:appintro:3.2.0'
 }
 ```
 
@@ -39,18 +39,23 @@ public class MyIntro extends AppIntro {
 
         // Add your slide's fragments here
         // AppIntro will automatically generate the dots indicator and buttons.
-        addSlide(new FirstSlide(), getApplicationContext());
-        addSlide(new SecondSlide(), getApplicationContext());
-        addSlide(new ThirdSlide(), getApplicationContext());
-        addSlide(new FourthSlide(), getApplicationContext());
+        addSlide(first_fragment);
+        addSlide(second_fragment);
+        addSlide(third_fragment);
+        addSlide(fourth_fragment);
+        
+        // Instead of fragments, you can also use our default slide
+        // Just set a title, description, background and image. AppIntro will do the rest
+        addSlide(AppIntroFragment.newInstance(title, description, image, background_colour));
 
         // OPTIONAL METHODS
         // Override bar/separator color
         setBarColor(Color.parseColor("#3F51B5"));
         setSeparatorColor(Color.parseColor("#2196F3"));
 
-        // Hide Skip button
+        // Hide Skip/Done button
         showSkipButton(false);
+        showDoneButton(false);
 
         // Turn vibration on and set intensity
         // NOTE: you will probably need to ask VIBRATE permesssion in Manifest
@@ -83,12 +88,38 @@ public class MyIntro extends AppIntro2 {
 
 <img src="https://github.com/PaoloRotolo/AppIntro/blob/master/art/layout2.png" width="300">
 <img src="https://github.com/PaoloRotolo/AppIntro/blob/master/art/layout2_2.png" width="300">
+<br><br>
+### Easy implementation of Slide Fragments
+As you can see, things have changed in AppIntro 3.0.0. Now it's so easy to add new slides to AppIntro. <br><br>
+For example:
+ * Copy the class **SampleSlide** from my [example project](https://github.com/PaoloRotolo/AppIntro/blob/master/example/src/main/java/com/github/paolorotolo/appintroexample/SampleSlide.java).
+ * Add a new slide with ```addSlide(SampleSlide.newInstance(R.layout.your_slide_here));```
+ 
+There's no need to create one class for fragment anymore. :)
+
+#### I've never used fragments...
+No problem, just use this method and AppIntro will generate a new slide for you.
+
+```java
+addSlide(AppIntroFragment.newInstance(title, description, image, background_colour));
+```
 
 ### Animations
-AppIntro comes with a Fade animation, that you can activate with:
+AppIntro comes with some pager animations.
+Choose the one you like and then active it with:
+
 ```java
 // Put this method in init()
 setFadeAnimation();
+```
+
+Available animations:
+```java
+    setFadeAnimation()
+    setZoomAnimation()
+    setFlowAnimation()
+    setSlideOverAnimation()
+    setDepthAnimation()
 ```
 
 If you want to create nice parallax effect or your custom animation, create your own **PageTransformer** and call:
@@ -100,6 +131,20 @@ setCustomTransformer(transformer);
 
 Click [here](https://github.com/PaoloRotolo/AppIntro/blob/90a513fda9b70a5e5df35435a7f2984832727eeb/AppIntroExample/app/src/main/java/com/github/paolorotolo/appintroexample/animations/CustomAnimation.java) to see how I did it in the example app.
 
+### Android M ready
+Android M introduced some exiting updates about permissions. <br>
+Let's say your Slide A talks about using location. As you go to Slide B, the app can actually requests location permission.
+
+How can you do it? Simple, try this method:
+
+```java
+onDotSelected(index) {
+  if (index == 1) {
+    // Code to ask permission here
+  }
+}
+```
+
 ## Example
 See example code here on Github. You can also see it live downloading [this app from Google Play](https://play.google.com/store/apps/details?id=paolorotolo.github.com.appintroexample).
 
@@ -110,6 +155,12 @@ See example code here on Github. You can also see it live downloading [this app 
  * [Audio Reminder Pro](https://play.google.com/store/apps/details?id=com.brandon.audioreminderpro);
  * [Wizr Daily Quotes](https://play.google.com/store/apps/details?id=com.wizrapp);
  * [Planets](https://play.google.com/store/apps/details?id=com.andrewq.planets);
+ * [Weather Delta](https://play.google.com/store/apps/details?id=com.felkertech.n.weatherdelta);
+ * [PDF Me](https://play.google.com/store/apps/details?id=com.pdfme);
+ * [Circles](https://play.google.com/store/apps/details?id=com.felipejoglar.circles);
+ * [Task Master](https://play.google.com/store/apps/details?id=com.cr5315.taskmaster);
+ * [Smoothie Recipes](https://play.google.com/store/apps/details?id=com.skykonig.smoothierecipes);
+ * [SideBar Notes](https://play.google.com/store/apps/details?id=com.app.floating.notes);
 
 If you are using AppIntro in your app and would like to be listed here, please let me know via [email](mailto:paolorotolo@ubuntu.com)!
 
