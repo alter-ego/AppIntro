@@ -136,6 +136,10 @@ public abstract class AppIntro extends FragmentActivity {
     }
 
     public void selectDot(int index) {
+        if (fragments.size() == 0) {
+            return;
+        }
+
         Resources res = getResources();
         for (int i = 0; i < fragments.size(); i++) {
             int drawableId = (i == index) ? (R.drawable.indicator_dot_white) : (R.drawable.indicator_dot_grey);
