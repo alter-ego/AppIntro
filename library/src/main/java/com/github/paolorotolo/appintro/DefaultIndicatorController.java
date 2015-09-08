@@ -29,6 +29,7 @@ class DefaultIndicatorController implements IndicatorController {
     public void initialize(int slideCount) {
         mDots = new ArrayList<>();
         mSlideCount = slideCount;
+        mDotLayout.removeAllViews();
 
         for (int i = 0; i < slideCount; i++) {
             ImageView dot = new ImageView(mContext);
