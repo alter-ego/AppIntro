@@ -172,6 +172,10 @@ public abstract class AppIntro extends AppCompatActivity {
     public void addSlide(@NonNull Fragment fragment) {
         fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
+
+        if (mController != null) {
+            mController.initialize(fragments.size());
+        }
     }
 
     @NonNull
