@@ -9,9 +9,9 @@ import com.github.paolorotolo.appintro.AppIntro2;
 public class SecondLayoutIntro extends AppIntro2 {
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(SampleSlide.newInstance(R.layout.intro_2), "intro_2");
-        addSlide(SampleSlide.newInstance(R.layout.intro2_2), "intro2_2");
-        addSlide(SampleSlide.newInstance(R.layout.intro3_2), "intro3_2");
+        addSlide(SampleSlide.newInstance(R.layout.intro_2));
+        addSlide(SampleSlide.newInstance(R.layout.intro2_2));
+        addSlide(SampleSlide.newInstance(R.layout.intro3_2));
     }
 
     private void loadMainActivity(){

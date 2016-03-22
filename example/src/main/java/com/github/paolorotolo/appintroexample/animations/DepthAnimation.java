@@ -17,10 +17,10 @@ public class DepthAnimation extends AppIntro {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(SampleSlide.newInstance(R.layout.intro), "intro");
-        addSlide(SampleSlide.newInstance(R.layout.intro2), "intro2");
-        addSlide(SampleSlide.newInstance(R.layout.intro3), "intro3");
-        addSlide(SampleSlide.newInstance(R.layout.intro4), "intro4");
+        addSlide(SampleSlide.newInstance(R.layout.intro));
+        addSlide(SampleSlide.newInstance(R.layout.intro2));
+        addSlide(SampleSlide.newInstance(R.layout.intro3));
+        addSlide(SampleSlide.newInstance(R.layout.intro4));
 
         setDepthAnimation();
     }

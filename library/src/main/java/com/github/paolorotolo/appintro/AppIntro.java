@@ -103,11 +103,11 @@ public abstract class AppIntro extends AppCompatActivity {
             }
         });
 
-        if (isRtlLayout()) {
-            mPagerAdapter = new RtlPagerAdapter(super.getSupportFragmentManager(), fragments);
-        } else {
+//        if (isRtlLayout()) {
+//            mPagerAdapter = new RtlPagerAdapter(super.getSupportFragmentManager(), fragments);
+//        } else {
+//        }
             mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
-        }
         pager = (ViewPager) findViewById(R.id.view_pager);
 
         pager.setAdapter(this.mPagerAdapter);
@@ -198,18 +198,10 @@ public abstract class AppIntro extends AppCompatActivity {
     }
 
     /**
-     * @deprecated Do not use this method anymore. For RTL support, a fragment identifier is required.
-     * @param fragment Fragment to be added
+     * @param fragment to be added to the tutorial
      */
-    @Deprecated
     public void addSlide(@NonNull Fragment fragment) {
-        fragments.add(fragment);
-        mPagerAdapter.notifyDataSetChanged();
-        slidesNumber = fragments.size();
-
-        if (mController != null) {
-            mController.initialize(fragments.size());
-        }
+        addSlide(fragment, "page_" + fragments.size() + 1);
     }
 
     /**
@@ -218,7 +210,11 @@ public abstract class AppIntro extends AppCompatActivity {
      */
     public void addSlide(@NonNull Fragment fragment, @NonNull String fragmentIdentifier) {
         fragment.getArguments().putString(PagerAdapter.FRAGMENT_IDENTIFIER, fragmentIdentifier);
-        fragments.add(fragment);
+        if (isRtlLayout()) {
+            fragments.add(0,fragment);
+        } else {
+            fragments.add(fragment);
+        }
         mPagerAdapter.notifyDataSetChanged();
         slidesNumber = fragments.size();
 
