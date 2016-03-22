@@ -321,7 +321,7 @@ public abstract class AppIntro extends AppCompatActivity {
         return super.onKeyDown(code, kvent);
     }
 
-    private boolean isRtlLayout() {
+    protected boolean isRtlLayout() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return (TextUtils.getLayoutDirectionFromLocale(getResources().getConfiguration().locale) == View.LAYOUT_DIRECTION_RTL);
         }
