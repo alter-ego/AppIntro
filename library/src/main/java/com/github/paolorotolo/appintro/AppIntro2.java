@@ -88,7 +88,11 @@ public abstract class AppIntro2 extends AppCompatActivity {
             }
         });
 
-        mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        if (isRtlLayout()) {
+            mPagerAdapter = new RtlPagerAdapter(super.getSupportFragmentManager(), fragments);
+        } else {
+            mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        }
         pager = (ViewPager) findViewById(R.id.view_pager);
         pager.setAdapter(this.mPagerAdapter);
 
@@ -165,11 +169,7 @@ public abstract class AppIntro2 extends AppCompatActivity {
     }
 
     public void addSlide(@NonNull Fragment fragment) {
-        if (isRtlLayout()) {
-            fragments.add(0,fragment);
-        } else {
-            fragments.add(fragment);
-        }
+        fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
         slidesNumber = fragments.size();
 

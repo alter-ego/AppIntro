@@ -103,7 +103,11 @@ public abstract class AppIntro extends AppCompatActivity {
             }
         });
 
-        mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        if (isRtlLayout()) {
+            mPagerAdapter = new RtlPagerAdapter(super.getSupportFragmentManager(), fragments);
+        } else {
+            mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        }
         pager = (ViewPager) findViewById(R.id.view_pager);
 
         pager.setAdapter(this.mPagerAdapter);
@@ -120,7 +124,7 @@ public abstract class AppIntro extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (slidesNumber > 1)
                     if (isRtlLayout()) {
-                        mController.selectPosition(slidesNumber-1-position);
+                        mController.selectPosition(slidesNumber - 1 - position);
                     } else {
                         mController.selectPosition(position);
                     }
@@ -194,11 +198,7 @@ public abstract class AppIntro extends AppCompatActivity {
     }
 
     public void addSlide(@NonNull Fragment fragment) {
-        if (isRtlLayout()) {
-            fragments.add(0,fragment);
-        } else {
-            fragments.add(fragment);
-        }
+        fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
         slidesNumber = fragments.size();
 

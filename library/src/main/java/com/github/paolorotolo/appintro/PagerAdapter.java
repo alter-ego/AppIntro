@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 class PagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
+    protected List<Fragment> fragments;
 
     public PagerAdapter(FragmentManager fm, @NonNull List<Fragment> fragments) {
         super(fm);
