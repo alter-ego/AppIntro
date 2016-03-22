@@ -9,10 +9,6 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintroexample.MainActivity;
 import com.github.paolorotolo.appintroexample.R;
 import com.github.paolorotolo.appintroexample.SampleSlide;
-import com.github.paolorotolo.appintroexample.slides.FirstSlide;
-import com.github.paolorotolo.appintroexample.slides.FourthSlide;
-import com.github.paolorotolo.appintroexample.slides.SecondSlide;
-import com.github.paolorotolo.appintroexample.slides.ThirdSlide;
 
 public class FadeAnimation extends AppIntro {
     @Override

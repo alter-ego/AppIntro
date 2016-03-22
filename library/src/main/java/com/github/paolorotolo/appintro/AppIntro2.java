@@ -2,6 +2,7 @@ package com.github.paolorotolo.appintro;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -53,13 +55,26 @@ public abstract class AppIntro2 extends AppCompatActivity {
         final ImageView doneButton = (ImageView) findViewById(R.id.done);
         mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
+        int nextDrawable = R.drawable.ic_arrow_forward_white_24px;
+        if (isRtlLayout()) {
+            nextDrawable = R.drawable.ic_arrow_back_white;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            nextButton.setImageDrawable(getResources().getDrawable(nextDrawable));
+        } else {
+            nextButton.setImageDrawable(getResources().getDrawable(nextDrawable, this.getTheme()));
+        }
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View v) {
                 if (isVibrateOn) {
                     mVibrator.vibrate(vibrateIntensity);
                 }
-                pager.setCurrentItem(pager.getCurrentItem() + 1);
+                if (isRtlLayout()) {
+                    pager.setCurrentItem(pager.getCurrentItem() - 1);
+                } else {
+                    pager.setCurrentItem(pager.getCurrentItem() + 1);
+                }
             }
         });
 
@@ -88,8 +103,12 @@ public abstract class AppIntro2 extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (slidesNumber > 1)
-                    mController.selectPosition(position);
-                if (position == slidesNumber - 1) {
+                    if (isRtlLayout()) {
+                        mController.selectPosition(slidesNumber-1-position);
+                    } else {
+                        mController.selectPosition(position);
+                    }
+                if ((!isRtlLayout() && position == slidesNumber - 1) || (isRtlLayout() && position == 0)) {
                     nextButton.setVisibility(View.GONE);
                     if (showDone) {
                         doneButton.setVisibility(View.VISIBLE);
@@ -116,6 +135,16 @@ public abstract class AppIntro2 extends AppCompatActivity {
         } else {
             initController();
         }
+
+        setCurrentItem();
+    }
+
+    protected void setCurrentItem() {
+        if (isRtlLayout() && slidesNumber > 1) {
+            pager.setCurrentItem(slidesNumber - 1);
+        } else {
+            pager.setCurrentItem(0);
+        }
     }
 
     public ViewPager getPager() {
@@ -141,8 +170,24 @@ public abstract class AppIntro2 extends AppCompatActivity {
         onDotSelected(index);
     }
 
+    /**
+     * @param fragment to be added to the tutorial
+     */
     public void addSlide(@NonNull Fragment fragment) {
-        fragments.add(fragment);
+        addSlide(fragment, "page_" + (fragments.size() + 1));
+    }
+
+    /**
+     * @param fragment to be added to the tutorial
+     * @param fragmentIdentifier unique identifier for the fragment - required for RTL support.
+     */
+    public void addSlide(@NonNull Fragment fragment, @NonNull String fragmentIdentifier) {
+        fragment.getArguments().putString(PagerAdapter.FRAGMENT_IDENTIFIER, fragmentIdentifier);
+        if (isRtlLayout()) {
+            fragments.add(0,fragment);
+        } else {
+            fragments.add(fragment);
+        }
         mPagerAdapter.notifyDataSetChanged();
         slidesNumber = fragments.size();
 
@@ -233,5 +278,12 @@ public abstract class AppIntro2 extends AppCompatActivity {
             return false;
         }
         return super.onKeyDown(code, kevent);
+    }
+
+    protected boolean isRtlLayout() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return (TextUtils.getLayoutDirectionFromLocale(getResources().getConfiguration().locale) == View.LAYOUT_DIRECTION_RTL);
+        }
+        return false;
     }
 }

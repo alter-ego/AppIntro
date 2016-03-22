@@ -39,4 +39,5 @@ public class SampleSlide extends Fragment {
         return inflater.inflate(layoutResId, container, false);
     }
 
+
 }

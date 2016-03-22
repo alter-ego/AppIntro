@@ -4,20 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import com.github.paolorotolo.appintro.AppIntro;
-import com.github.paolorotolo.appintroexample.slides.FirstSlide;
-import com.github.paolorotolo.appintroexample.slides.FourthSlide;
-import com.github.paolorotolo.appintroexample.slides.SecondSlide;
-import com.github.paolorotolo.appintroexample.slides.ThirdSlide;
 
 public class DefaultIntro extends AppIntro {
+
     @Override
     public void init(Bundle savedInstanceState) {
         addSlide(SampleSlide.newInstance(R.layout.intro));
         addSlide(SampleSlide.newInstance(R.layout.intro2));
         addSlide(SampleSlide.newInstance(R.layout.intro3));
         addSlide(SampleSlide.newInstance(R.layout.intro4));
-
     }
 
     private void loadMainActivity(){
