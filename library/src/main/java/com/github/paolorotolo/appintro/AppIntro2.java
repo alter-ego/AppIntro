@@ -168,7 +168,27 @@ public abstract class AppIntro2 extends AppCompatActivity {
         onDotSelected(index);
     }
 
+    /**
+     * @deprecated Do not use this method anymore. For RTL support, a fragment identifier is required.
+     * @param fragment Fragment to be added
+     */
+    @Deprecated
     public void addSlide(@NonNull Fragment fragment) {
+        fragments.add(fragment);
+        mPagerAdapter.notifyDataSetChanged();
+        slidesNumber = fragments.size();
+
+        if (mController != null) {
+            mController.initialize(fragments.size());
+        }
+    }
+
+    /**
+     * @param fragment to be added to the tutorial
+     * @param fragmentIdentifier unique identifier for the fragment - required for RTL support.
+     */
+    public void addSlide(@NonNull Fragment fragment, @NonNull String fragmentIdentifier) {
+        fragment.getArguments().putString(PagerAdapter.FRAGMENT_IDENTIFIER, fragmentIdentifier);
         fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
         slidesNumber = fragments.size();
