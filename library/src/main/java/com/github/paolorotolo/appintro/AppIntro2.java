@@ -135,12 +135,15 @@ public abstract class AppIntro2 extends AppCompatActivity {
         } else {
             initController();
         }
+
         setCurrentItem();
     }
 
-    private void setCurrentItem() {
+    protected void setCurrentItem() {
         if (isRtlLayout() && slidesNumber > 1) {
             pager.setCurrentItem(slidesNumber - 1);
+        } else {
+            pager.setCurrentItem(0);
         }
     }
 
@@ -191,8 +194,6 @@ public abstract class AppIntro2 extends AppCompatActivity {
         if (mController != null) {
             mController.initialize(fragments.size());
         }
-
-        setCurrentItem();
     }
 
     @NonNull

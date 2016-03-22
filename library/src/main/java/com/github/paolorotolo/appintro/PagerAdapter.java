@@ -3,11 +3,11 @@ package com.github.paolorotolo.appintro;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
-class PagerAdapter extends FragmentPagerAdapter {
+class PagerAdapter extends FragmentStatePagerAdapter {
 
     public static final String FRAGMENT_IDENTIFIER = "FRAGMENT_IDENTIFIER";
 
@@ -23,15 +23,15 @@ class PagerAdapter extends FragmentPagerAdapter {
         return this.fragments.get(position);
     }
 
-    @Override
-    public long getItemId(int position) {
-        String id = getItem(position).getArguments().getString(FRAGMENT_IDENTIFIER, null);
-        if (id != null) {
-            return id.hashCode();
-        } else {
-            return super.getItemId(position);
-        }
-    }
+//    @Override
+//    public long getItemId(int position) {
+//        String id = getItem(position).getArguments().getString(FRAGMENT_IDENTIFIER, null);
+//        if (id != null) {
+//            return id.hashCode();
+//        } else {
+//            return super.getgetItemId(position);
+//        }
+//    }
 
     @Override
     public int getCount() {
