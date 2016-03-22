@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.github.paolorotolo.appintro.AppIntro;
 
 public class DefaultIntro extends AppIntro {
+
     @Override
     public void init(Bundle savedInstanceState) {
         addSlide(SampleSlide.newInstance(R.layout.intro));

@@ -103,11 +103,7 @@ public abstract class AppIntro extends AppCompatActivity {
             }
         });
 
-//        if (isRtlLayout()) {
-//            mPagerAdapter = new RtlPagerAdapter(super.getSupportFragmentManager(), fragments);
-//        } else {
-//        }
-            mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
         pager = (ViewPager) findViewById(R.id.view_pager);
 
         pager.setAdapter(this.mPagerAdapter);
@@ -163,9 +159,14 @@ public abstract class AppIntro extends AppCompatActivity {
             initController();
         }
 
+        setCurrentItem();
+    }
 
-        if (isRtlLayout()) {
+    protected void setCurrentItem() {
+        if (isRtlLayout() && slidesNumber > 1) {
             pager.setCurrentItem(slidesNumber - 1);
+        } else {
+            pager.setCurrentItem(0);
         }
     }
 
@@ -201,7 +202,7 @@ public abstract class AppIntro extends AppCompatActivity {
      * @param fragment to be added to the tutorial
      */
     public void addSlide(@NonNull Fragment fragment) {
-        addSlide(fragment, "page_" + fragments.size() + 1);
+        addSlide(fragment, "page_" + (fragments.size() + 1));
     }
 
     /**
